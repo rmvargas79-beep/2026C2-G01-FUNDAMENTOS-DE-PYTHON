@@ -12,6 +12,7 @@
 
 ventas_semana = [145000, 118000, 162000, 137000, 128000]
 META_SEMANAL = 700000
+#
 
 cantidad_dias = len(ventas_semana)
 total_ventas = sum(ventas_semana)

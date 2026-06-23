@@ -105,8 +105,14 @@ try:
             print(f"Capacidad máxima: {CAPACIDAD_MAXIMA}")
             print(f"Espacios disponibles: {campos_disponibles}")
             print(f"Porcentaje de ocupación: {porcentaje_ocupacion:.2f}%")
-            print(f"El Grupo mas pequeño aceptado es : {min(grupos_aceptados)}")
-            print(f"El Grupo mas grande aceptado es : {max(grupos_aceptados)}")        
+            print(f"El Grupo mas pequeño aceptado es 🤏: {min(grupos_aceptados)}")
+            print(f"El Grupo mas grande aceptado es 👨‍💻: {max(grupos_aceptados)}")
+            print("Lista de grupos aceptados📋 :")
+            for grupo in grupos_aceptados:
+                print(f"Grupo de {grupo} personas")
+            print("Lista de grupos rechazados📋 :")
+            for grupo in grupos_rechazados:
+                print(f"Grupo de {grupo} personas")        
             print(f"Estado final: {estado_final}")
             continuar = False
 

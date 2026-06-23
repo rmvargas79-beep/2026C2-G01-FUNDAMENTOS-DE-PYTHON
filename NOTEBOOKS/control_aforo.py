@@ -73,27 +73,60 @@ Otros casos para probar:
 
 
 # Desarrolle su solución a partir de esta línea.
-
-grupos_aceptados = [] #Lista de los grupos
-grupo_aceptado = 0 # contador de grupo
-grupo_rechazados = 0 #contador de grupo
-personas_admitidas = 0 # cantidad de personas
-CAPACIDAD_MAXIMA = 700 # 
-espacios_disponibles = 0
-porcentaje_de_ocupación = 0
-aceptado_mas_pequeño = 0
-aceptado_mas_grande = 0
-continuar = True
+porcentaje_ocupacion = 0.0
+cantidad_grupo = 0
+grupos_aceptados = [] #Lista de los grupos aceptados
+grupos_rechazados = [] #Lista de los grupos rechazados
+grupo_aceptado = 0
+grupo_rechazado = 0
+personas_admitidas = 0
+CAPACIDAD_MAXIMA = 700
+campos_disponibles = 700
+continuar = True # condicion para terminar
+estado_final = "Disponibilidad Normal"
 
 while continuar:
-  
-if  personas_admitidas > CAPACIDAD_MAXIMA and continuar:
-  cantidad_grupo = int(input(print("Digite la cantidad de Personas: ")))
-  if espacios_disponibles <= cantidad_grupo:
-    grupo_aceptado += 1
-    personas_admitidas += cantidad_grupo
-    grupos_aceptados.append(personas_admitidas)
-    condicion = input("Pri")
+
+    eleccion = input("Digite la cantidad de personas o 'fin' para terminar: ").strip().lower()
     
+    if eleccion == "fin":
+        porcentaje_ocupacion = (personas_admitidas / CAPACIDAD_MAXIMA) * 100
+        if campos_disponibles == 0:
+            estado_final = "Capacidad Completa"
+        elif campos_disponibles >= 560 and campos_disponibles < 699:
+            estado_final = "Ocupación Preventiva"
+        
+        print("\n📈 REPORTE FINAL")
+        print(f"Grupos aceptados: {grupo_aceptado}")
+        print(f"Grupos rechazados: {grupo_rechazado}")
+        print(f"Personas admitidas: {personas_admitidas}")
+        print(f"Capacidad máxima: {CAPACIDAD_MAXIMA}")
+        print(f"Espacios disponibles: {campos_disponibles}")
+        print(f"Porcentaje de ocupación: {porcentaje_ocupacion:.2f}%")
+        print(f"El Grupo mas pequeño aceptado es : {min(grupos_aceptados)}")
+        print(f"El Grupo mas grande aceptado es : {max(grupos_aceptados)}")        
+        print(f"Estado final: {estado_final}")
+        continuar = False
+
+    else:
+      cantidad_grupo = int(eleccion)
+
+    if cantidad_grupo <= 0:
+        print(f"El grupo debe ser mayor a cero. ✖️")
+          
+    if personas_admitidas + cantidad_grupo <= CAPACIDAD_MAXIMA:
+        grupo_aceptado += 1
+        personas_admitidas += cantidad_grupo
+        grupos_aceptados.append(cantidad_grupo)
+        campos_disponibles = (CAPACIDAD_MAXIMA - personas_admitidas)
+        print("Bienvenidos a la actividad por favor pasen adelante.")
+        print(f"Ocupación actual es de: {personas_admitidas} personas.")
+        print(f"La cantidad de campos disponibles es de: {campos_disponibles}.")
+
+    else:
+        print(f"Lo sentimos no tenemos mas lugares")
+
+        grupos_rechazados.append(cantidad_grupo)
+        grupo_rechazado += 1
     
     

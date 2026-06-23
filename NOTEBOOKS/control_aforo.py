@@ -1,7 +1,7 @@
 """Reto integrador: control de ingreso al Anfiteatro del CENAC.
 
-Nombre del estudiante: __________________________________________
-Fecha: ____________________
+Nombre del estudiante: Ronald Mauricio Vargas Villegas
+Fecha: 22/06/2026
 
 Contexto:
 El Anfiteatro del Centro Nacional de la Cultura (CENAC), en Costa Rica, tiene
@@ -73,3 +73,27 @@ Otros casos para probar:
 
 
 # Desarrolle su solución a partir de esta línea.
+
+grupos_aceptados = [] #Lista de los grupos
+grupo_aceptado = 0 # contador de grupo
+grupo_rechazados = 0 #contador de grupo
+personas_admitidas = 0 # cantidad de personas
+CAPACIDAD_MAXIMA = 700 # 
+espacios_disponibles = 0
+porcentaje_de_ocupación = 0
+aceptado_mas_pequeño = 0
+aceptado_mas_grande = 0
+continuar = True
+
+while continuar:
+  
+if  personas_admitidas > CAPACIDAD_MAXIMA and continuar:
+  cantidad_grupo = int(input(print("Digite la cantidad de Personas: ")))
+  if espacios_disponibles <= cantidad_grupo:
+    grupo_aceptado += 1
+    personas_admitidas += cantidad_grupo
+    grupos_aceptados.append(personas_admitidas)
+    condicion = input("Pri")
+    
+    
+    

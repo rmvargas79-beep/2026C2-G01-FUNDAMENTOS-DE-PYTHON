@@ -109,24 +109,24 @@ while continuar:
         continuar = False
 
     else:
-      cantidad_grupo = int(eleccion)
+        cantidad_grupo = int(eleccion)
 
-    if cantidad_grupo <= 0:
-        print(f"El grupo debe ser mayor a cero. ✖️")
-          
-    if personas_admitidas + cantidad_grupo <= CAPACIDAD_MAXIMA:
-        grupo_aceptado += 1
-        personas_admitidas += cantidad_grupo
-        grupos_aceptados.append(cantidad_grupo)
-        campos_disponibles = (CAPACIDAD_MAXIMA - personas_admitidas)
-        print("Bienvenidos a la actividad por favor pasen adelante.")
-        print(f"Ocupación actual es de: {personas_admitidas} personas.")
-        print(f"La cantidad de campos disponibles es de: {campos_disponibles}.")
+        if cantidad_grupo <= 0:
+            print(f"El grupo debe ser mayor a cero. ✖️")
+            
+        if personas_admitidas + cantidad_grupo <= CAPACIDAD_MAXIMA:
+            grupo_aceptado += 1
+            personas_admitidas += cantidad_grupo
+            grupos_aceptados.append(cantidad_grupo)
+            campos_disponibles = (CAPACIDAD_MAXIMA - personas_admitidas)
+            print("Bienvenidos a la actividad por favor pasen adelante.")
+            print(f"Ocupación actual es de: {personas_admitidas} personas.")
+            print(f"La cantidad de campos disponibles es de: {campos_disponibles}.")
 
-    else:
-        print(f"Lo sentimos no tenemos mas lugares")
-
-        grupos_rechazados.append(cantidad_grupo)
-        grupo_rechazado += 1
+        else:
+            print(f"Lo sentimos no tenemos mas lugares")
+            print(f"La cantidad de campos disponibles es de: {campos_disponibles}.")
+            grupos_rechazados.append(cantidad_grupo)
+            grupo_rechazado += 1
     
     

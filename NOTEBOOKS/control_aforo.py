@@ -85,48 +85,52 @@ campos_disponibles = 700
 continuar = True # condicion para terminar
 estado_final = "Disponibilidad Normal"
 
-while continuar:
-
-    eleccion = input("Digite la cantidad de personas o 'fin' para terminar: ").strip().lower()
+try:
     
-    if eleccion == "fin":
-        porcentaje_ocupacion = (personas_admitidas / CAPACIDAD_MAXIMA) * 100
-        if campos_disponibles == 0:
-            estado_final = "Capacidad Completa"
-        elif campos_disponibles >= 560 and campos_disponibles < 699:
-            estado_final = "Ocupación Preventiva"
+    while continuar:
+
+        eleccion = input("Digite la cantidad de personas o 'fin' para terminar: ").strip().lower()
         
-        print("\n📈 REPORTE FINAL")
-        print(f"Grupos aceptados: {grupo_aceptado}")
-        print(f"Grupos rechazados: {grupo_rechazado}")
-        print(f"Personas admitidas: {personas_admitidas}")
-        print(f"Capacidad máxima: {CAPACIDAD_MAXIMA}")
-        print(f"Espacios disponibles: {campos_disponibles}")
-        print(f"Porcentaje de ocupación: {porcentaje_ocupacion:.2f}%")
-        print(f"El Grupo mas pequeño aceptado es : {min(grupos_aceptados)}")
-        print(f"El Grupo mas grande aceptado es : {max(grupos_aceptados)}")        
-        print(f"Estado final: {estado_final}")
-        continuar = False
-
-    else:
-        cantidad_grupo = int(eleccion)
-
-        if cantidad_grupo <= 0:
-            print(f"El grupo debe ser mayor a cero. ✖️")
+        if eleccion == "fin":
+            porcentaje_ocupacion = (personas_admitidas / CAPACIDAD_MAXIMA) * 100
+            if campos_disponibles == 0:
+                estado_final = "Capacidad Completa"
+            elif campos_disponibles >= 560 and campos_disponibles < 699:
+                estado_final = "Ocupación Preventiva"
             
-        if personas_admitidas + cantidad_grupo <= CAPACIDAD_MAXIMA:
-            grupo_aceptado += 1
-            personas_admitidas += cantidad_grupo
-            grupos_aceptados.append(cantidad_grupo)
-            campos_disponibles = (CAPACIDAD_MAXIMA - personas_admitidas)
-            print("Bienvenidos a la actividad por favor pasen adelante.")
-            print(f"Ocupación actual es de: {personas_admitidas} personas.")
-            print(f"La cantidad de campos disponibles es de: {campos_disponibles}.")
+            print("\n📈 REPORTE FINAL")
+            print(f"Grupos aceptados: {grupo_aceptado}")
+            print(f"Grupos rechazados: {grupo_rechazado}")
+            print(f"Personas admitidas: {personas_admitidas}")
+            print(f"Capacidad máxima: {CAPACIDAD_MAXIMA}")
+            print(f"Espacios disponibles: {campos_disponibles}")
+            print(f"Porcentaje de ocupación: {porcentaje_ocupacion:.2f}%")
+            print(f"El Grupo mas pequeño aceptado es : {min(grupos_aceptados)}")
+            print(f"El Grupo mas grande aceptado es : {max(grupos_aceptados)}")        
+            print(f"Estado final: {estado_final}")
+            continuar = False
 
         else:
-            print(f"Lo sentimos no tenemos mas lugares")
-            print(f"La cantidad de campos disponibles es de: {campos_disponibles}.")
-            grupos_rechazados.append(cantidad_grupo)
-            grupo_rechazado += 1
-    
-    
+            cantidad_grupo = int(eleccion)
+
+            if cantidad_grupo <= 0:
+                print(f"El grupo debe ser mayor a cero. ✖️")
+                
+            if personas_admitidas + cantidad_grupo <= CAPACIDAD_MAXIMA:
+                grupo_aceptado += 1
+                personas_admitidas += cantidad_grupo
+                grupos_aceptados.append(cantidad_grupo)
+                campos_disponibles = (CAPACIDAD_MAXIMA - personas_admitidas)
+                print("Bienvenidos a la actividad por favor pasen adelante.")
+                print(f"Ocupación actual es de: {personas_admitidas} personas.")
+                print(f"La cantidad de campos disponibles es de: {campos_disponibles}.")
+
+            else:
+                print(f"Lo sentimos no tenemos mas lugares")
+                print(f"La cantidad de campos disponibles es de: {campos_disponibles}.")
+                grupos_rechazados.append(cantidad_grupo)
+                grupo_rechazado += 1
+        
+        
+except ValueError:
+    print("Solo se debe digitar fin o numeros enteros")

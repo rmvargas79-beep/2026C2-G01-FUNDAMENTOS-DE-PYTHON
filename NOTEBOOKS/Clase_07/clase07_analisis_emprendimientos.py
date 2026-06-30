@@ -30,7 +30,7 @@ def calcular_procentaje(total,ventas, formato = False):
     return porcentaje
 
 def calcular_clasificacion(total, meta):
-    porcentaje = calcular_porcetaja(total, meta)
+    porcentaje = calcular_porcetaje(total, meta)
     if porcentaja_sede >= 100:
         mensaje_sede = "Meta alcanzada."
     elif porcentaja_sede >= 80:
@@ -40,22 +40,24 @@ def calcular_clasificacion(total, meta):
 
 reporte = []
 
-for sede in sedes:
+"""
     print(sedes)
     print("Cantidad de sedes: ", len(sedes))
     print ("Tipo Variables sedes:", type(sedes[0]))
     print("Datos por sede: ", sedes[0].keys())
     print("Primera sede: ", sedes[0])
     print("Nombre Primera sede: ", sedes[0]["nombre"])
+""" 
+for sede in sedes:
 
 
 
-    sede_demo = sedes[0]
-    ventas = sede_demo["ventas"]
-    meta= sede_demo["meta"]
+
+    ventas = sede["ventas"]
+    meta= sede["meta"]
     total_sede = calcular_total(ventas)
     promedio_sede = calcular_promedio(ventas)
-    porcentaja_sede = calcular_procentaje(total_sede,meta, True)
+    porcentaje_sede = calcular_procentaje(total_sede,meta, True)
     estado = calcular_clasificacion(total_sede,meta)
 
 

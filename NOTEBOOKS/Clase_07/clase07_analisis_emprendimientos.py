@@ -36,9 +36,44 @@ def calcular_clasificacion(total, meta):
     elif porcentaje >= 80:
         mensaje_sede = "Meta casi alcanzada, prestar atencion."
     else:
-        "Meta no alcanzada URGE ATENCION"
+        mensaje_sede = "Meta no alcanzada URGE ATENCION"
 
+    return mensaje_sede
+
+def calcular_provincias(sedes):
+    
+    provincias = []
+    for sede in sedes:
+        prov = sede["provincia"] 
+        if prov not in provincias:
+            provincias.append(prov)
+            
+        
+    
+    return provincias
+
+
+def imprimir_reporte(lista):
+    
+    
+    return reporte
+
+def calcular_ingresos(sedes):
+    sedes_mas_altas = []
+    venta = 0
+    
+    for sede in sedes:
+        
+        if venta < sum(sede["ventas"]):
+            venta= sum(sede,["ventas"])
+            sedes_mas_altas = [sede["nombre"]]
+        elif venta == sum(sede["ventas"]):
+             sedes_mas_altas.append(sede["nombre"])
+
+    return sedes_mas_altas
 reporte = []
+
+venta_mas_alta = 0
 
 """
     print(sedes)
@@ -60,9 +95,15 @@ for sede in sedes:
     porcentaje= calcular_porcentaje(total_sede,meta,True)
     estado = calcular_clasificacion(total_sede,meta)
 
+    if venta_mas_alta <= total_sede:
+        venta_mas_alta = total_sede
+        #agregar una lista de la sede
+        
 
     print(porcentaje, total_sede)
 
+provincias = calcular_provincias(sedes)
+print(provincias)
 
 
 

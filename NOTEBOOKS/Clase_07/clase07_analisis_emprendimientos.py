@@ -22,7 +22,7 @@ def calcular_promedio(lista):
     """Retorna el promedio de ventas de una Lista"""
     return sum(lista) / len(lista)
 
-def calcular_procentaje(total,ventas, formato = False):
+def calcular_porcentaje(total,ventas, formato = False):
     porcentaje = total / meta * 100
     if formato:
         return f"{total / meta * 100:.2f}%"
@@ -30,10 +30,10 @@ def calcular_procentaje(total,ventas, formato = False):
     return porcentaje
 
 def calcular_clasificacion(total, meta):
-    porcentaje = calcular_porcetaje(total, meta)
-    if porcentaja_sede >= 100:
+    porcentaje = calcular_porcentaje(total, meta)
+    if porcentaje >= 100:
         mensaje_sede = "Meta alcanzada."
-    elif porcentaja_sede >= 80:
+    elif porcentaje >= 80:
         mensaje_sede = "Meta casi alcanzada, prestar atencion."
     else:
         "Meta no alcanzada URGE ATENCION"
@@ -57,11 +57,11 @@ for sede in sedes:
     meta= sede["meta"]
     total_sede = calcular_total(ventas)
     promedio_sede = calcular_promedio(ventas)
-    porcentaje_sede = calcular_procentaje(total_sede,meta, True)
+    porcentaje= calcular_porcentaje(total_sede,meta,True)
     estado = calcular_clasificacion(total_sede,meta)
 
 
-    print(porcentaja_sede, total_sede)
+    print(porcentaje, total_sede)
 
 
 

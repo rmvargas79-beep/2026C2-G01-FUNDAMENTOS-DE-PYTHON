@@ -68,7 +68,7 @@ def calcular_ingresos(sedes):
             venta= sum(sede,["ventas"])
             sedes_mas_altas = [sede["nombre"]]
         elif venta == sum(sede["ventas"]):
-             sedes_mas_altas.append(sede["nombre"])
+            sedes_mas_altas.append(sede["nombre"])
 
     return sedes_mas_altas
 reporte = []

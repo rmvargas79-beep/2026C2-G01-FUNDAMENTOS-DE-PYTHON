@@ -6,6 +6,9 @@ sede usando listas, diccionarios, funciones, ciclos y condicionales.
 
 from sedes import sedes
 
+reporte = []
+lista_impresion = []
+venta_mas_alta = 0
 
 def calcular_total(ventas):
     """_Recibo una lista, la sumo y retorno el total.
@@ -46,14 +49,27 @@ def calcular_provincias(sedes):
     for sede in sedes:
         prov = sede["provincia"] 
         if prov not in provincias:
-            provincias.append(prov)
-            
+            provincias.append(prov)     
         
-    
     return provincias
 
 
-def imprimir_reporte(lista):
+def imprimir_reporte(lista_impresion):
+    
+    """Imprime el reporte final de ventas por sede."""
+    print("REPORTE FINAL")
+    print("-" * 50)
+
+    for fila in lista_impresion:
+        print(f"Sede: {fila['nombre']}")
+        print(f"Provincia: {fila['provincia']}")
+        print(f"Tipo: {fila['tipo']}")
+        print(f"Total semanal: ₡{fila['total']:,.0f}")
+        print(f"Promedio diario: ₡{fila['promedio']:,.0f}")
+        print(f"Cumplimiento: {fila['porcentaje']}%")
+        print(f"Estado: {fila['estado']}")
+        print("-" * 50)
+
     
     
     return reporte
@@ -65,24 +81,18 @@ def calcular_ingresos(sedes):
     for sede in sedes:
         
         if venta < sum(sede["ventas"]):
-            venta= sum(sede,["ventas"])
+            venta= sum(sede["ventas"])
             sedes_mas_altas = [sede["nombre"]]
+            sedes_mas_altas.append(sum(sede["ventas"]))
         elif venta == sum(sede["ventas"]):
             sedes_mas_altas.append(sede["nombre"])
+            sedes_mas_altas.append(sum(sede["ventas"]))
 
     return sedes_mas_altas
-reporte = []
 
-venta_mas_alta = 0
 
-"""
-    print(sedes)
-    print("Cantidad de sedes: ", len(sedes))
-    print ("Tipo Variables sedes:", type(sedes[0]))
-    print("Datos por sede: ", sedes[0].keys())
-    print("Primera sede: ", sedes[0])
-    print("Nombre Primera sede: ", sedes[0]["nombre"])
-""" 
+
+
 for sede in sedes:
 
 
@@ -98,12 +108,30 @@ for sede in sedes:
     if venta_mas_alta <= total_sede:
         venta_mas_alta = total_sede
         #agregar una lista de la sede
-        
+    
+    lista_impresion.append(
+        {
+            "nombre": sede["nombre"],
+            "provincia": sede["provincia"],
+            "tipo": sede["tipo"],
+            "total": total_sede,
+            "promedio": promedio_sede,
+            "porcentaje": porcentaje,
+            "estado": estado,
+        }
+    )
+    print(imprimir_reporte(lista_impresion))
+    #print(porcentaje, total_sede)
 
-    print(porcentaje, total_sede)
 
+print("Cantidad de sedes:", len(lista_impresion))
 provincias = calcular_provincias(sedes)
-print(provincias)
+print(f"Las Provincias Evaluadas son : {provincias}")
+ventas_mayores = calcular_ingresos(sedes)
+print(f"Las Sedes con Mayores ventas son:")
+print(ventas_mayores)
+#print(len(ventas_mayores))
+
 
 
 

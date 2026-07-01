@@ -40,4 +40,11 @@ sedes = [
         "ventas": [115000, 108000, 112000, 118000, 121000],
         "meta": 560000,
     },
+    {
+        "nombre": "Pequeño Mundo",
+        "provincia": "Puntarenas",
+        "tipo": "Restaurante",
+        "ventas": [115000, 108000, 112000, 118000, 121000],
+        "meta": 560000,
+    },
 ]

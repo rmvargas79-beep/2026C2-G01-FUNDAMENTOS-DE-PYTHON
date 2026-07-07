@@ -55,6 +55,7 @@ else:
     conteo_hombres = 0
     adultos_mayores = []
     lista_enfermedades = []
+    conteo_enfermedades = {}
 
     # 4. Ciclo principal
     # Cada vuelta del ciclo representa un paciente del JSON.
@@ -63,6 +64,7 @@ else:
         edad = paciente["edad"]
         provincia = paciente["provincia"]
         genero = paciente["genero"]
+        enfermedades = paciente["enfermedades"]
 
         # REQUERIMIENTO 3:
         # Complete aqui los acumuladores dentro del ciclo.
@@ -90,6 +92,10 @@ else:
         for enfermedad in paciente["enfermedades"]:
             if enfermedad not in lista_enfermedades:
                 lista_enfermedades.append(enfermedad)
+            if enfermedad in conteo_enfermedades:
+                conteo_enfermedades[enfermedad] +=1
+            else:
+                conteo_enfermedades[enfermedad] = 1
         
 
 
@@ -105,9 +111,16 @@ else:
     print("Mujeres:", conteo_mujeres)
     print("Hombres:", conteo_hombres)
     print("Adultos mayores:", adultos_mayores)
+    print("Cantidad de Enfermedades Unicas:", len(lista_enfermedades))
 
     # REQUERIMIENTO 5:
     # Escriba dos conclusiones basadas en los resultados.
     print("\nCONCLUSIONES")
     print("Conclusion 1: Para recorrer listas siempre es mejor mas facil y sencillo usar For")
     print("Conclusion 2: La sintaxis es super importante, despues de los errores se logica la sintaxis es muy comun")
+
+    print("\nCONTEO Enfermedades")
+    for enfermedad, cantidad in conteo_enfermedades.items():
+        print(enfermedad, ":", cantidad)
+    
+    

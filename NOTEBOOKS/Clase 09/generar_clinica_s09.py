@@ -20,7 +20,7 @@ ARCHIVO_SALIDA = "clinica_s09.json"
 # Los nombres se asignan a posiciones cuyo genero sintetico ya coincide. De
 # este modo no se altera la secuencia aleatoria usada por las verificaciones.
 ESTUDIANTES_CURSO = {
-    1: "Germán Antonio Cerdas Valle",
+    1: "Ronald Vargas Villegas",
     2: "Bryan Cruz Flores",
     6: "José Pablo Delgado Martínez",
     8: "Eduardo Jesús Jiménez Hernández",

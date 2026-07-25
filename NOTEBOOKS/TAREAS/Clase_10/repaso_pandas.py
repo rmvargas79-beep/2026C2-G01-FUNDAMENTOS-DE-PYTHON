@@ -18,4 +18,7 @@ print(estudiantes)
 
 estudiantes["nota"] = (estudiantes["puntos"] * 100) / pts
 
+estudiantes["Estado"] = estudiantes["nota"].apply( lambda nota: "Aprobado" if nota >= 70 else "Reprobado")
+
+
 print(estudiantes)

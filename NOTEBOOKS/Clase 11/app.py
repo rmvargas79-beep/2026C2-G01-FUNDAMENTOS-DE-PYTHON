@@ -36,7 +36,8 @@ def ejecutar():
             filtrado = filtrar_por_tipo_entidad(datos)
             print(filtrado.to_string())
         elif opcion == "4":
-            
+            entidades = filtrar_por_entidad(datos)
+            print(entidades.to_string())
         elif opcion == "5":
             pass
         elif opcion == "6":

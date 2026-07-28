@@ -41,6 +41,7 @@ def limpiar_datos(datos):
         'Diferencial Cambiario': 'DIFERENCIAL',
         'Compra':'COMPRA',
         'Venta': 'VENTA'
+        'Última Actualización':'FECHA'
     }, inplace=True)
     
 

@@ -40,7 +40,7 @@ def limpiar_datos(datos):
         'Entidad Autorizada': 'ENTIDAD',
         'Diferencial Cambiario': 'DIFERENCIAL',
         'Compra':'COMPRA',
-        'Venta': 'VENTA'
+        'Venta': 'VENTA',
         'Última Actualización':'FECHA'
     }, inplace=True)
     

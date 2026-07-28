@@ -40,7 +40,11 @@ def ejecutar():
             print(filtrado.to_string())
         elif opcion == "4":
             entidades = filtrar_por_entidad(datos)
-            print(entidades.to_string(index=False))
+            linea = 1
+            for entidad in entidades:
+                linea += 1
+                print(linea, "Entidad:" ,entidad)
+            
         elif opcion == "5":
             alertas = filtrar_diferencial_alto(datos)
             if alertas.empty:

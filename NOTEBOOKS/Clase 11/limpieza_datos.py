@@ -67,7 +67,7 @@ def filtrar_por_tipo_entidad(datos: pd.DataFrame):
     ).copy()
     return datos_agrupados
 
-def filtrar_por_entidad(datos: pd.DataFrame, entidad: str) -> pd.DataFrame:
+def filtrar_por_entidad(datos: pd.DataFrame) -> list:
     """Filtra los datos por entidad específica."""
-    filtro = datos["ENTIDAD"].str.contains(entidad)
-    return datos[filtro].copy() 
+    filtro = datos["ENTIDAD"].unique().tolist()
+    return filtro 

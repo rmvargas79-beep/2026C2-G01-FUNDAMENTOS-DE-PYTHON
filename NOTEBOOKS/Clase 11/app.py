@@ -5,8 +5,9 @@ from limpieza_datos import limpiar_datos
 
 def mostrar_primeras_entidades(datos):
     """Muestra una vita de las columnas principales"""
+    
     columnas = ["ENTIDAD","COMPRA","VENTA","DIFERENCIAL"]
-    print(datos[columnas])
+    print(datos[columnas].head().to_string(index=False))
 
 def ejecutar():
     datos_crudos = cargar_tabla_bccr(URL_BCCR)

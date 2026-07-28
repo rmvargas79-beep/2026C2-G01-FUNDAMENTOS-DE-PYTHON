@@ -26,7 +26,10 @@ def ejecutar():
         if opcion == "1":
             mostrar_primeras_entidades(datos)
         elif opcion == "2":
-            filtrar_diferencial_alto(datos)
+            resultado = filtrar_diferencial_alto(datos)
+            resultado = resultado.sort_values(by="DIFERENCIAL", ascending=False)
+            mostrar_primeras_entidades(resultado)
+        
         elif opcion == "3":
             pass
         elif opcion == "4":

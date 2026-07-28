@@ -3,6 +3,10 @@
 from lectura_datos import URL_BCCR, cargar_tabla_bccr
 from limpieza_datos import limpiar_datos
 
+def mostrar_primeras_entidades(datos):
+    """Muestra una vita de las columnas principales"""
+    columnas = ["ENTIDAD","COMPRA","VENTA","DIFERENCIAL"]
+    print(datos[columnas])
 
 def ejecutar():
     datos_crudos = cargar_tabla_bccr(URL_BCCR)
@@ -19,8 +23,7 @@ def ejecutar():
         
         opcion = input("Ingrese la opcion del Menu: ").lower().strip()
         if opcion == "1":
-            datos.info()
-            print(datos.head())
+            mostrar_primeras_entidades(datos)
         elif opcion == "2":
             pass
         elif opcion == "3":

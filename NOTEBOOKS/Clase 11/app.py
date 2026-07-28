@@ -1,12 +1,16 @@
 """Programa Principal del proyecto modular del BCCR"""
 
-import lectura_datos as ld
-import limpieza_datos as lim
+from lectura_datos import URL_BCCR, cargar_tabla_bccr
+
+
 
 def ejecutar():
-    print("Hola Mundo")
+    datos_crudos = cargar_tabla_bccr(URL_BCCR)
+    print(datos_crudos)
 
-if __name__ == "main":
+
+
+if __name__ == "__main__":
     ejecutar()
     
     

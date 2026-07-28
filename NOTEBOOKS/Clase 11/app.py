@@ -1,7 +1,7 @@
 """Programa Principal del proyecto modular del BCCR"""
 
 from lectura_datos import URL_BCCR, cargar_tabla_bccr
-from limpieza_datos import limpiar_datos, filtrar_diferencial_alto
+from limpieza_datos import limpiar_datos, filtrar_diferencial_alto, filtrar_por_tipo_entidad
 
 def mostrar_primeras_entidades(datos):
     """Muestra una vita de las columnas principales"""
@@ -31,7 +31,8 @@ def ejecutar():
             mostrar_primeras_entidades(resultado)
         
         elif opcion == "3":
-            pass
+            filtrado = filtrar_por_tipo_entidad(datos)
+            print(filtrado.to_string())
         elif opcion == "4":
             pass
         elif opcion == "5":

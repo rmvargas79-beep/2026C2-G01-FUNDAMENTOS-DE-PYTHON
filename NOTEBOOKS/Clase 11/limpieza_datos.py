@@ -54,3 +54,15 @@ def filtrar_diferencial_alto(datos: pd.DataFrame) -> pd.DataFrame:
     promedio_diferencial = datos["DIFERENCIAL"].mean()
     filtro = datos["DIFERENCIAL"] > promedio_diferencial
     return datos[filtro].copy()
+
+
+def filtrar_por_tipo_entidad(datos: pd.DataFrame):
+    """Agrupar por tipo de entidad y calcular el promedio de compra,venta y diferencial"""
+    columnas = ['COMPRA','VENTA','DIFERENCIAL']
+    datos_agrupados = ( 
+        datos.groupby('TIPO')[columnas]
+        .mean()
+        .round(2)
+        .sort_values(by='DIFERENCIAL', ascending=False)
+    ).copy()
+    return datos_agrupados

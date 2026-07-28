@@ -3,23 +3,23 @@
 import  matplotlib.pyplot as plt
 import pandas as pd
 
-from lectura_datos import URL_BCCR, cargar_tabla_bccr
+from lectura_datos import leer_archivos_csv()
 from limpieza_datos import limpiar_datos, filtrar_diferencial_alto, filtrar_por_tipo_entidad,filtrar_por_entidad
 
 
 
-def mostrar_primeras_entidades(datos):
+def mostrar_primeras_entradas(datos):
     """Muestra una vita de las columnas principales"""
     
-    columnas = ["ENTIDAD","COMPRA","VENTA","DIFERENCIAL"]
+    columnas = ["CODIGO","PRODUCTOS","TIPO","CALIDAD/TAMAÑO","UNIDADVENTA","PRECIO","IVA","SEMANA","MES","AÑO"]
     print(datos[columnas].head().to_string(index=False))
 
 def ejecutar():
-    datos_crudos = cargar_tabla_bccr(URL_BCCR)
+    datos_crudos = leer_archivos_csv()
     datos = limpiar_datos(datos_crudos)
-    print("Datos cargados exitosamente de https://gee.bccr.fi.cr")
+    print("Datos cargados exitosamente")
     while True:
-        print("\nPROYECTO DE ANALISIS BCCR")
+        print("\nPROYECTO DE ANALISIS PRECIOS CNP")
         print("1. Mostrar primeras entidades Limpias")
         print("2. Mostrar entidades con diferencial superior al promedio")
         print("3. Promedio por tipo entidad")
@@ -29,45 +29,17 @@ def ejecutar():
         
         opcion = input("Ingrese la opcion del Menu: ").lower().strip()
         if opcion == "1":
-            mostrar_primeras_entidades(datos)
+            mostrar_primeras_entradas(datos)
         elif opcion == "2":
-            resultado = filtrar_diferencial_alto(datos)
-            resultado = resultado.sort_values(by="DIFERENCIAL", ascending=False)
-            mostrar_primeras_entidades(resultado)
+            pass
         
         elif opcion == "3":
-            filtrado = filtrar_por_tipo_entidad(datos)
-            print(filtrado.to_string())
+            pass
         elif opcion == "4":
-            entidades = filtrar_por_entidad(datos)
-            linea = 1
-            for entidad in entidades:
-                linea += 1
-                print(linea, "Entidad:" ,entidad)
+            pass
             
         elif opcion == "5":
-            alertas = filtrar_diferencial_alto(datos)
-            if alertas.empty:
-                print("No hay datos para graficar.")
-                return
-
-
-            top_cinco = alertas.sort_values("DIFERENCIAL", ascending=False).head(5)
-            top_cinco = top_cinco.sort_values("DIFERENCIAL")
-
-
-            grafico = top_cinco.plot(
-            kind="barh",
-            x="ENTIDAD",
-            y="DIFERENCIAL",
-            legend=False,
-            color="steelblue",
-            title="Entidades con mayor diferencial",
-            )
-            grafico.set_xlabel("Diferencial (VENTA - COMPRA)")
-            grafico.set_ylabel("Entidad autorizada")
-            plt.tight_layout()
-            plt.show()
+            pass
         elif opcion == "6":
             print("\nAnalisis Finalizado")
             input("Presione Enter para Salir...")

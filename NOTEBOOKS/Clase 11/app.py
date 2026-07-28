@@ -34,11 +34,13 @@ def ejecutar():
             input("Presione Enter para Salir...")
             break
         else:
-            print("Opcion invalida. Escriba un numero del 1 al 6.")
-    datos.info()
-    print(datos_crudos.head())
-    print(datos.head())
-    datos.info()
+            print("\nERROR Opcion invalida. Escriba un numero del 1 al 6.")
+            
+        input("Presione enter para continuar..")
+    #datos.info()
+    #print(datos_crudos.head())
+    #print(datos.head())
+    #atos.info()
 
 
 

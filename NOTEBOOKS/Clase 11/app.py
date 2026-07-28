@@ -1,5 +1,8 @@
 """Programa Principal del proyecto modular del BCCR"""
 
+import  matplotlib.pyplot as plt
+import pandas as pd
+
 from lectura_datos import URL_BCCR, cargar_tabla_bccr
 from limpieza_datos import limpiar_datos, filtrar_diferencial_alto, filtrar_por_tipo_entidad,filtrar_por_entidad, mostrar_primeras_entidades
 
@@ -39,7 +42,13 @@ def ejecutar():
             entidades = filtrar_por_entidad(datos)
             print(entidades.to_string())
         elif opcion == "5":
-            pass
+            filtrado = filtrar_por_tipo_entidad(datos)
+            filtrado.plot.bar(y="DIFERENCIAL", title="Promedio Diferencial por Tipo de Entidad", legend=False)
+            plt.xlabel("Tipo de Entidad")
+            plt.ylabel("Promedio Diferencial")
+            plt.xticks(rotation=45)
+            plt.tight_layout()
+            plt.show()
         elif opcion == "6":
             print("\nAnalisis Finalizado")
             input("Presione Enter para Salir...")

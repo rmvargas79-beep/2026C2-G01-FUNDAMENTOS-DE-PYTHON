@@ -40,13 +40,13 @@ def ejecutar():
             print(filtrado.to_string())
         elif opcion == "4":
             entidades = filtrar_por_entidad(datos)
-            print(entidades.to_string())
+            print(entidades.to_string(index=False))
         elif opcion == "5":
             alertas = filtrar_diferencial_alto(datos)
             if alertas.empty:
                 print("No hay datos para graficar.")
                 return
-            
+
 
             top_cinco = alertas.sort_values("DIFERENCIAL", ascending=False).head(5)
             top_cinco = top_cinco.sort_values("DIFERENCIAL")

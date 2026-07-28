@@ -69,5 +69,5 @@ def filtrar_por_tipo_entidad(datos: pd.DataFrame):
 
 def filtrar_por_entidad(datos: pd.DataFrame, entidad: str) -> pd.DataFrame:
     """Filtra los datos por entidad específica."""
-    filtro = datos["ENTIDAD"].str.contains(entidad, case=False, na=False)
+    filtro = datos["ENTIDAD"].str.contains(entidad)
     return datos[filtro].copy() 

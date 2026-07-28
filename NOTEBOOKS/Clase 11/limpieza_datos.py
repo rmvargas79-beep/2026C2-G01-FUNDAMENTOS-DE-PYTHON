@@ -46,3 +46,11 @@ def limpiar_datos(datos):
     
 
     return datos_limpios
+
+
+
+def filtrar_diferencial_alto(datos: pd.DataFrame) -> pd.DataFrame:
+    """Devuelve diferenciales Altos en un dataframe"""
+    promedio_diferencial = datos["DIFERENCIAL"].mean()
+    filtro = datos["DIFERENCIAL"] > promedio_diferencial
+    return datos[filtro].copy()

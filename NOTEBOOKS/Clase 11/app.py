@@ -9,7 +9,8 @@ def ejecutar():
     datos = limpiar_datos(datos_crudos)
     datos.info()
     print(datos_crudos.head())
-    
+    print(datos.head())
+    datos.info()
 
 
 

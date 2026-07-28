@@ -30,9 +30,9 @@ def limpiar_datos(datos):
     datos_limpios = datos_limpios.dropna(
         subset=["Compra", "Venta"]
     ).copy()
-    datos_limpios["Diferencial"] = (
-        datos_limpios["Venta"] - datos_limpios["Compra"]
-    )
+    #datos_limpios["Diferencial"] = (
+    #    datos_limpios["Venta"] - datos_limpios["Compra"]
+    #)
     
     #Renombrar nombres Columnas
     datos_limpios.rename(columns = {

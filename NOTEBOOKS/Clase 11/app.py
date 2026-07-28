@@ -4,7 +4,7 @@ import  matplotlib.pyplot as plt
 import pandas as pd
 
 from lectura_datos import URL_BCCR, cargar_tabla_bccr
-from limpieza_datos import limpiar_datos, filtrar_diferencial_alto, filtrar_por_tipo_entidad,filtrar_por_entidad, mostrar_primeras_entidades
+from limpieza_datos import limpiar_datos, filtrar_diferencial_alto, filtrar_por_tipo_entidad,filtrar_por_entidad
 
 
 
@@ -42,11 +42,29 @@ def ejecutar():
             entidades = filtrar_por_entidad(datos)
             print(entidades.to_string())
         elif opcion == "5":
-            filtrado = filtrar_por_tipo_entidad(datos)
-            filtrado.plot.bar(y="DIFERENCIAL", title="Promedio Diferencial por Tipo de Entidad", legend=False)
-            plt.xlabel("Tipo de Entidad")
-            plt.ylabel("Promedio Diferencial")
-            plt.xticks(rotation=45)
+        
+            alertas = filtrar_diferencial_alto(datos)
+
+
+            if alertas.empty:
+            print("No hay datos para graficar.")
+            return
+
+
+            top_cinco = alertas.sort_values("DIFERENCIAL", ascending=False).head(5)
+            top_cinco = top_cinco.sort_values("DIFERENCIAL")
+
+
+            grafico = top_cinco.plot(
+            kind="barh",
+            x="ENTIDAD",
+            y="DIFERENCIAL",
+            legend=False,
+            color="steelblue",
+            title="Entidades con mayor diferencial",
+            )
+            grafico.set_xlabel("Diferencial (VENTA - COMPRA)")
+            grafico.set_ylabel("Entidad autorizada")
             plt.tight_layout()
             plt.show()
         elif opcion == "6":

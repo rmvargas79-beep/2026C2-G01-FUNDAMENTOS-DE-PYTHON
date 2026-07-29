@@ -3,7 +3,7 @@
 import  matplotlib.pyplot as plt
 import pandas as pd
 
-from lectura_datos import leer_archivos_csv()
+from lectura_datos import leer_archivos_csv
 from limpieza_datos import limpiar_datos, filtrar_diferencial_alto, filtrar_por_tipo_entidad,filtrar_por_entidad
 
 
@@ -16,7 +16,8 @@ def mostrar_primeras_entradas(datos):
 
 def ejecutar():
     datos_crudos = leer_archivos_csv()
-    datos = limpiar_datos(datos_crudos)
+    datos = datos_crudos.copy()
+    #datos = limpiar_datos(datos_crudos)
     print("Datos cargados exitosamente")
     while True:
         print("\nPROYECTO DE ANALISIS PRECIOS CNP")
@@ -29,7 +30,8 @@ def ejecutar():
         
         opcion = input("Ingrese la opcion del Menu: ").lower().strip()
         if opcion == "1":
-            mostrar_primeras_entradas(datos)
+            #mostrar_primeras_entradas(datos)
+            datos.info()
         elif opcion == "2":
             pass
         

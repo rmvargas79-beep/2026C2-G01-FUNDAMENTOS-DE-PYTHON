@@ -54,5 +54,6 @@ def limpiar_datos(datos):
     errors="ignore"
     )
     
+    datos_limpios["CODIGO"] = datos_limpios["CODIGO"].astype(int)
 
     return datos_limpios

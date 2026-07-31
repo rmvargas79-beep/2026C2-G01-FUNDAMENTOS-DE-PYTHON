@@ -42,7 +42,7 @@ def limpiar_datos(datos):
         'Calidad / Tamaño':'CALIDAD',
         'Unidad de Venta': 'UNIDAD',
         'IVA':'IVA',
-        'Precio venta':'PRECIO',
+        'Precio Venta':'PRECIO',
         'Semana':'SEMANA',
         'Mes':'MES',
         'Año':'AÑO'

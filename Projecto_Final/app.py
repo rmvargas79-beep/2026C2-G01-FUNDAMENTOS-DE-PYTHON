@@ -4,14 +4,14 @@ import  matplotlib.pyplot as plt
 import pandas as pd
 
 from lectura_datos import leer_archivos_csv
-from limpieza_datos import limpiar_datos, filtrar_diferencial_alto, filtrar_por_tipo_entidad,filtrar_por_entidad
+from limpieza_datos import limpiar_datos
 
 
 
 def mostrar_primeras_entradas(datos):
     """Muestra una vita de las columnas principales"""
     
-    columnas = ["CODIGO","PRODUCTOS","TIPO","CALIDAD/TAMAÑO","UNIDADVENTA","PRECIO","IVA","SEMANA","MES","AÑO"]
+    columnas = ["CODIGO","PRODUCTOS","TIPO","CALIDAD","UNIDAD","PRECIO","IVA","SEMANA","MES","AÑO"]
     print(datos[columnas].head().to_string(index=False))
 
 def ejecutar():

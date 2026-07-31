@@ -44,6 +44,11 @@ def limpiar_datos(datos):
         'Última Actualización':'FECHA'
     }, inplace=True)
     
+    datos_limpios.drop(
+    columns=["Precio venta", "Precio venra"],
+    inplace=True,
+    errors="ignore"
+)
 
     return datos_limpios
 

@@ -6,7 +6,7 @@ from datetime import datetime
 
 def leer_archivos_csv():
     
-    # Diccionario de meses en español
+    # Diccionario de meses para tener el mes de referencia de los datos
     meses = {
         1: "Enero",
         2: "Febrero",

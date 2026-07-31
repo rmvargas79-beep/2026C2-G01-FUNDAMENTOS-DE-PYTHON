@@ -17,7 +17,7 @@ def mostrar_primeras_entradas(datos):
 def ejecutar():
     datos_crudos = leer_archivos_csv()
     datos = datos_crudos.copy()
-    #datos = limpiar_datos(datos_crudos)
+    datos = limpiar_datos(datos_crudos)
     print("Datos cargados exitosamente")
     while True:
         print("\nPROYECTO DE ANALISIS PRECIOS CNP")
@@ -30,8 +30,9 @@ def ejecutar():
         
         opcion = input("Ingrese la opcion del Menu: ").lower().strip()
         if opcion == "1":
-            #mostrar_primeras_entradas(datos)
-            datos.info()
+            mostrar_primeras_entradas(datos)
+            #datos.info()
+            #print(datos.head())
         elif opcion == "2":
             pass
         

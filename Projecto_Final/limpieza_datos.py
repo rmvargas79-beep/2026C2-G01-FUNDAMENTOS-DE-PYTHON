@@ -7,19 +7,19 @@ def limpiar_datos(datos):
     """Prepara la tabla del BCCR y calcula la columna Diferencial."""
     datos_limpios = datos.copy()
 
-    datos_limpios.columns = datos_limpios.iloc[0]
-    datos_limpios = datos_limpios.iloc[1:].reset_index(drop=True)
-    datos_limpios["Tipo de Entidad"] = (
-        datos_limpios["Tipo de Entidad"].ffill()
-    )
-    datos_limpios = datos_limpios.dropna(
-        subset=["Entidad Autorizada"]
-    ).copy()
+    #datos_limpios.columns = datos_limpios.iloc[0]
+    #datos_limpios = datos_limpios.iloc[1:].reset_index(drop=True)
+    #datos_limpios["Tipo de Entidad"] = (
+    #    datos_limpios["Tipo de Entidad"].ffill()
+    #)
+    #datos_limpios = datos_limpios.dropna(
+    #    subset=["Entidad Autorizada"]
+    #).copy()
 
-    columnas_numericas = ["Compra", "Venta"]
+    columnas_numericas = ["Código", "Precio venta", "Semana", "Año", "Precio venta", "Precio venra"]
 
-    if "Diferencial Cambiario" in datos_limpios.columns:
-        columnas_numericas.append("Diferencial Cambiario")
+    #if "Diferencial Cambiario" in datos_limpios.columns:
+    #    columnas_numericas.append("Diferencial Cambiario")
 
     for columna in columnas_numericas:
         datos_limpios[columna] = pd.to_numeric(
@@ -27,47 +27,26 @@ def limpiar_datos(datos):
             errors="coerce",
         )
 
-    datos_limpios = datos_limpios.dropna(
-        subset=["Compra", "Venta"]
-    ).copy()
+    #datos_limpios = datos_limpios.dropna(
+    #    subset=["Compra", "Venta"]
+    #).copy()
     #datos_limpios["Diferencial"] = (
     #    datos_limpios["Venta"] - datos_limpios["Compra"]
     #)
     
     #Renombrar nombres Columnas
     datos_limpios.rename(columns = {
-        'Tipo de Entidad':'TIPO',
-        'Entidad Autorizada': 'ENTIDAD',
-        'Diferencial Cambiario': 'DIFERENCIAL',
-        'Compra':'COMPRA',
-        'Venta': 'VENTA',
-        'Última Actualización':'FECHA'
+        'Código':'CODIGO',
+        'Productos': 'PRODUCTOS',
+        'Tipo': 'TIPO',
+        'Calidad / Tamaño':'CALIDAD',
+        'Unidad de Venta': 'UNIDAD',
+        'IVA':'IVA',
+        'Precio venta':'PRECIO',
+        'Semana':'SEMANA',
+        'Mes':'MES',
+        'Año':'AÑO'
     }, inplace=True)
     
 
     return datos_limpios
-
-
-
-def filtrar_diferencial_alto(datos: pd.DataFrame) -> pd.DataFrame:
-    """Devuelve diferenciales Altos en un dataframe"""
-    promedio_diferencial = datos["DIFERENCIAL"].mean()
-    filtro = datos["DIFERENCIAL"] > promedio_diferencial
-    return datos[filtro].copy()
-
-
-def filtrar_por_tipo_entidad(datos: pd.DataFrame):
-    """Agrupar por tipo de entidad y calcular el promedio de compra,venta y diferencial"""
-    columnas = ['COMPRA','VENTA','DIFERENCIAL']
-    datos_agrupados = ( 
-        datos.groupby('TIPO')[columnas]
-        .mean()
-        .round(2)
-        .sort_values(by='DIFERENCIAL', ascending=False)
-    ).copy()
-    return datos_agrupados
-
-def filtrar_por_entidad(datos: pd.DataFrame) -> list:
-    """Filtra los datos por entidad específica."""
-    filtro = datos["ENTIDAD"].unique().tolist()
-    return filtro 

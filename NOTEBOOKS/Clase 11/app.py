@@ -16,6 +16,7 @@ def mostrar_primeras_entidades(datos):
 
 def ejecutar():
     datos_crudos = cargar_tabla_bccr(URL_BCCR)
+    print(datos_crudos.head())
     datos = limpiar_datos(datos_crudos)
     print("Datos cargados exitosamente de https://gee.bccr.fi.cr")
     while True:
@@ -29,7 +30,8 @@ def ejecutar():
         
         opcion = input("Ingrese la opcion del Menu: ").lower().strip()
         if opcion == "1":
-            mostrar_primeras_entidades(datos)
+            #mostrar_primeras_entidades(datos)
+            datos.info()
         elif opcion == "2":
             resultado = filtrar_diferencial_alto(datos)
             resultado = resultado.sort_values(by="DIFERENCIAL", ascending=False)

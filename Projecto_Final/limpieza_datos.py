@@ -16,7 +16,7 @@ def limpiar_datos(datos):
     #    subset=["Entidad Autorizada"]
     #).copy()
 
-    columnas_numericas = ["Código", "Precio venta", "Semana", "Año", "Precio venta", "Precio venra"]
+    columnas_numericas = ["Código", "Precio Venta", "Semana", "Año", "Precio venta", "Precio venra"]
 
     #if "Diferencial Cambiario" in datos_limpios.columns:
     #    columnas_numericas.append("Diferencial Cambiario")
@@ -47,6 +47,12 @@ def limpiar_datos(datos):
         'Mes':'MES',
         'Año':'AÑO'
     }, inplace=True)
+    
+    datos_limpios.drop(
+    columns=["Precio venta", "Precio venra"],
+    inplace=True,
+    errors="ignore"
+    )
     
 
     return datos_limpios

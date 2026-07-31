@@ -15,7 +15,7 @@ def limpiar_datos(datos):
     #datos_limpios = datos_limpios.dropna(
     #    subset=["Entidad Autorizada"]
     #).copy()
-
+    datos_limpios["Código"] = datos_limpios["Código"].astype(int)
     columnas_numericas = ["Código", "Precio Venta", "Semana", "Año"]
 
     #if "Diferencial Cambiario" in datos_limpios.columns:
@@ -48,7 +48,7 @@ def limpiar_datos(datos):
         'Año':'AÑO'
     }, inplace=True)
     
-    #datos_limpios["CODIGO"] = datos_limpios["CODIGO"].astype(int)
+    
     
     datos_limpios.drop(
     columns=["Precio venta", "Precio venra"],

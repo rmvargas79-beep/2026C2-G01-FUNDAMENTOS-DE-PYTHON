@@ -4,22 +4,11 @@ import pandas as pd
 
 
 def limpiar_datos(datos):
-    """Prepara la tabla del BCCR y calcula la columna Diferencial."""
+    """Prepara y Limpia los datos que se leen de los cvs y estan en el dataframe de pandas."""
     datos_limpios = datos.copy()
 
-    #datos_limpios.columns = datos_limpios.iloc[0]
-    #datos_limpios = datos_limpios.iloc[1:].reset_index(drop=True)
-    #datos_limpios["Tipo de Entidad"] = (
-    #    datos_limpios["Tipo de Entidad"].ffill()
-    #)
-    #datos_limpios = datos_limpios.dropna(
-    #    subset=["Entidad Autorizada"]
-    #).copy()
-    datos_limpios["Código"] = datos_limpios["Código"].astype(int)
+    datos_limpios["Código"] = datos_limpios["Código"].astype("Int64")
     columnas_numericas = ["Código", "Precio Venta", "Semana", "Año"]
-
-    #if "Diferencial Cambiario" in datos_limpios.columns:
-    #    columnas_numericas.append("Diferencial Cambiario")
 
     for columna in columnas_numericas:
         datos_limpios[columna] = pd.to_numeric(
@@ -27,13 +16,6 @@ def limpiar_datos(datos):
             errors="coerce",
         )
 
-    #datos_limpios = datos_limpios.dropna(
-    #    subset=["Compra", "Venta"]
-    #).copy()
-    #datos_limpios["Diferencial"] = (
-    #    datos_limpios["Venta"] - datos_limpios["Compra"]
-    #)
-    
     #Renombrar nombres Columnas
     datos_limpios.rename(columns = {
         'Código':'CODIGO',

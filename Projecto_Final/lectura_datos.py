@@ -36,7 +36,7 @@ def leer_archivos_csv():
         df = pd.read_csv(
             archivo,
             sep=";",
-            encoding="latin-1",
+            encoding="utf-8",
             skiprows=2
         )
 

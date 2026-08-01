@@ -1,45 +1,13 @@
-from pathlib import Path
+from carga_datos import cargar_datos
 
-import kagglehub
-import pandas as pd
 
-dataset = "aayushmishra1512/twitchdata"
-
-try:
-    # Descargar el dataset completo
-    ruta_descarga = Path(
-        kagglehub.dataset_download(
-            dataset,
-            force_download=True
-        )
-    )
-
-    print("Dataset descargado en:")
-    print(ruta_descarga)
-
-    # Buscar automáticamente todos los CSV
-    if ruta_descarga.is_file():
-        archivos_csv = [ruta_descarga]
+def ejecutar():
+    df = cargar_datos()
+    if df.empty:
+        print("No se pudieron cargar los datos.")
     else:
-        archivos_csv = list(ruta_descarga.rglob("*.csv"))
+        print("\nPrimeros cinco registros del dataset:")
+        print(df.head())
 
-    if not archivos_csv:
-        raise FileNotFoundError(
-            "El dataset se descargó, pero no contiene archivos CSV."
-        )
-
-    print("\nArchivos CSV encontrados:")
-
-    for archivo in archivos_csv:
-        print("-", archivo.name)
-
-    # Abrir el primer CSV encontrado
-    df = pd.read_csv(archivos_csv[0])
-
-    print("\nPrimeros cinco registros:")
-    print(df.head())
-
-except Exception as error:
-    print("\nOcurrió un error:")
-    print(type(error).__name__)
-    print(error)
+if __name__ == "__main__":
+    ejecutar()

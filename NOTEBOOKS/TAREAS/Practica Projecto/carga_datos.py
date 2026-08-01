@@ -1,19 +1,48 @@
+from pathlib import Path
+
 import kagglehub
-from kagglehub import KaggleDatasetAdapter
+import pandas as pd
 
-file_path = "twitchdata.csv"
+dataset = "aayushmishra1512/twitchdata"
 
-try:
-    df = kagglehub.dataset_load(
-        KaggleDatasetAdapter.PANDAS,
-        "aayushmishra1512/twitchdata",
-        file_path
-    )
+def cargar_datos() -> pd.DataFrame:
+    """Descarga y carga el dataset de Kaggle en un DataFrame de pandas."""
+    try:
+        # Descargar el dataset completo
+        ruta_descarga = Path(
+            kagglehub.dataset_download(
+                dataset,
+                force_download=True
+            )
+        )
 
-    print("Primeros 5 registros:")
-    print(df.head())
+        print("Dataset descargado en:")
+        print(ruta_descarga)
 
-except Exception as error:
-    print("Ocurrió un error:")
-    print(type(error).__name__)
-    print(error)
+        # Buscar automáticamente todos los CSV
+        if ruta_descarga.is_file():
+            archivos_csv = [ruta_descarga]
+        else:
+            archivos_csv = list(ruta_descarga.rglob("*.csv"))
+
+        if not archivos_csv:
+            raise FileNotFoundError(
+                "El dataset se descargó, pero no contiene archivos CSV."
+            )
+
+        print("\nArchivos CSV encontrados:")
+
+        for archivo in archivos_csv:
+            print("-", archivo.name)
+
+        # Abrir el primer CSV encontrado
+        df = pd.read_csv(archivos_csv[0])
+
+        print("\nPrimeros cinco registros:")
+        print(df.head())
+
+    except Exception as error:
+        print("\nOcurrió un error:")
+        print(type(error).__name__)
+        print(error)
+        return pd.DataFrame() # Retorna un DataFrame vacío en caso de error

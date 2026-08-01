@@ -9,5 +9,5 @@ def ejecutar():
         print("\nPrimeros cinco registros del dataset:")
         print(df.head())
 
-if __name__ == "__main__":
+if __name__ == "__main__":    
     ejecutar()

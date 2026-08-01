@@ -38,8 +38,8 @@ def cargar_datos() -> pd.DataFrame:
         # Abrir el primer CSV encontrado
         df = pd.read_csv(archivos_csv[0])
 
-        print("\nPrimeros cinco registros:")
-        print(df.head())
+        print("\nCarga Datos Exitosa:")
+        return df
 
     except Exception as error:
         print("\nOcurrió un error:")

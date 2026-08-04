@@ -48,7 +48,7 @@ def comparar_productos(datos):
     while True:
         print("\nComparar Dos Productos")
         print("1. Comparar Dos Productos Por Código")
-        print("2. Comparar Dos Productos Por Nombre")
+        print("2. Comparar Productos Por Nombre")
         print("3. Salir")
 
         opcion = input("Ingrese la opción del menú: ").lower().strip()
@@ -95,7 +95,7 @@ def comparar_productos(datos):
                 )
 
             if not producto1.empty and not producto2.empty:
-                resultado = (datos[datos["PRODUCTOS"].str.contains(nombre1,case=False,na=False) | datos["PRODUCTOS"].str.contains(nombre2,case=False,na=False)][columnas].sort_values(by=["PRODUCTOS", "SEMANA"]))
+                resultado = (datos[datos["PRODUCTOS"].str.contains(nombre1,case=False,na=False) | datos["PRODUCTOS"].str.contains(nombre2,case=False,na=False)][columnas].sort_values(by=["PRODUCTOS"]))
                 print("\nComparación de productos por nombre:\n")
                 print(resultado.to_string(index=False))
 

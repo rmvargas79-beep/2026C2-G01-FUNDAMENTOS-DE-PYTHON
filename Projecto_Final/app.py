@@ -11,8 +11,9 @@ from limpieza_datos import limpiar_datos
 def mostrar_primeras_entradas(datos):
     """Muestra una vita de las columnas principales"""
     
-    columnas = ["CODIGO","PRODUCTOS","TIPO","CALIDAD","UNIDAD","PRECIO","IVA","SEMANA","MES","AÑO"]
-    print(datos[columnas].head().to_string(index=False))
+    columnas = ["CODIGO","PRODUCTOS","TIPO","CALIDAD"]
+    datos_ordenados = datos.sort_values(by="PRODUCTOS")
+    print(datos_ordenados[columnas].to_string(index=False))
 
 def ejecutar():
     datos_crudos = leer_archivos_csv()

@@ -13,7 +13,33 @@ def mostrar_primeras_entradas(datos):
     
     columnas = ["CODIGO","PRODUCTOS","TIPO","CALIDAD"]
     datos_ordenados = datos.sort_values(by="PRODUCTOS")
-    print(datos_ordenados[columnas].to_string(index=False))
+    datos_ordenados = datos_ordenados.drop_duplicates(subset="CODIGO")
+    #print(datos_ordenados[columnas].to_string(index=False))
+    
+    # Ancho de cada columna
+    ancho = {
+        "CODIGO": 10,
+        "PRODUCTOS": 40,
+        "TIPO": 20,
+        "CALIDAD": 20
+    }
+
+    # Encabezados
+    encabezado = ""
+    for col in columnas:
+        encabezado += col.center(ancho[col])
+
+    print(encabezado)
+    print("-" * len(encabezado))
+
+    # Filas
+    for _, fila in datos_ordenados.iterrows():
+        print(
+            str(fila["CODIGO"]).center(ancho["CODIGO"]) +
+            str(fila["PRODUCTOS"]).center(ancho["PRODUCTOS"]) +
+            str(fila["TIPO"]).center(ancho["TIPO"]) +
+            str(fila["CALIDAD"]).center(ancho["CALIDAD"])
+        )
 
 def ejecutar():
     datos_crudos = leer_archivos_csv()
@@ -31,7 +57,8 @@ def ejecutar():
         
         opcion = input("Ingrese la opcion del Menu: ").lower().strip()
         if opcion == "1":
-            mostrar_primeras_entradas(datos)
+            #mostrar_primeras_entradas(datos)
+            print(len(datos))
             #datos.info()
             #print(datos.head())
         elif opcion == "2":

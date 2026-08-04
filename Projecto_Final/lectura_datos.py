@@ -71,13 +71,13 @@ def leer_archivos_csv():
         ventas = pd.concat(lista_df, ignore_index=True)
 
     # Mostrar información
-    print("\nInformación del DataFrame")
-    print(ventas.info())
+    #print("\nInformación del DataFrame")
+    #print(ventas.info())
 
-    print("\nPrimeros registros")
-    print(ventas.head())
+    #print("\nPrimeros registros")
+    #print(ventas.head())
 
-    print("\nCantidad de registros:", len(ventas))
+    #print("\nCantidad de registros:", len(ventas))
     
     return ventas
 

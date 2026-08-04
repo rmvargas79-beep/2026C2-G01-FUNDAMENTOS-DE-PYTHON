@@ -30,7 +30,9 @@ def limpiar_datos(datos):
         'Año':'AÑO'
     }, inplace=True)
     
-    
+    datos_limpios = datos_limpios.dropna(
+            subset=["CODIGO", "PRODUCTOS", "TIPO", "CALIDAD"]
+        ).copy()
     
     datos_limpios.drop(
     columns=["Precio venta", "Precio venra"],

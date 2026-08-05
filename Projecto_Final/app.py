@@ -3,7 +3,8 @@
 import  matplotlib.pyplot as plt
 import pandas as pd
 
-from procesamiento_datos import calcular_variacion_periodos, calcular_menor_variacion_periodos , mostrar_primeras_entradas , comparar_productos
+from procesamiento_datos import (calcular_variacion_periodos, calcular_menor_variacion_periodos , mostrar_primeras_entradas,
+                                comparar_productos, calcular_menor_variacion_precio)
 
 from lectura_datos import leer_archivos_csv
 from limpieza_datos import limpiar_datos
@@ -64,53 +65,6 @@ def calcular_mayor_variacion_precio(datos):
 
         input("\nPresione Enter para continuar...")    
     
-
-def calcular_menor_variacion_precio(datos):
-    """Muestra los 10 productos con menor variación de precio."""
-
-    while True:
-        print("\nMostrar los 10 productos con menor variación de precio")
-        print("1. Comparar dos semanas")
-        print("2. Comparar dos meses")
-        print("3. Comparar dos años")
-        print("4. Salir")
-
-        opcion = input("Ingrese la opción del menú: ").strip()
-
-        if opcion == "1":
-            
-            semana1 = int(input("Digite el número de la primera semana: ").strip())
-            semana2 = int(input("Digite el número de la segunda semana: ").strip()) 
-
-            calcular_menor_variacion_periodos(datos=datos,columna_periodo="SEMANA",periodo1=semana1,periodo2=semana2,descripcion="semanas")
-
-        elif opcion == "2":
-            mes1 = input(
-                "Digite el nombre del primer mes: "
-            ).strip().capitalize()
-
-            mes2 = input(
-                "Digite el nombre del segundo mes: "
-            ).strip().capitalize()
-
-            calcular_menor_variacion_periodos(datos=datos,columna_periodo="MES",periodo1=mes1,periodo2=mes2,descripcion="meses")
-            
-        elif opcion == "3":
-            anio1 = int(input("Digite el primer año: ").strip())
-            anio2 = int(input("Digite el segundo año: ").strip())
-            
-            calcular_menor_variacion_periodos(datos=datos,columna_periodo="AÑO",periodo1=anio1,periodo2=anio2,descripcion="años")
-            
-
-        elif opcion == "4":
-            print("\nFin del análisis de variación de precios.")
-            input("Presione Enter para salir...")
-            break
-
-        else:
-            print("\nERROR: Opción inválida. Escriba un número del 1 al 4.")
-
-        input("\nPresione Enter para continuar...")
 
 
 def ejecutar():

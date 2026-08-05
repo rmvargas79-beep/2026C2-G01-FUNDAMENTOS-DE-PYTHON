@@ -3,7 +3,7 @@
 import  matplotlib.pyplot as plt
 import pandas as pd
 
-from procesamiento_datos import calcular_variacion_periodos
+from procesamiento_datos import calcular_variacion_periodos, calcular_menor_variacion_periodos
 
 from lectura_datos import leer_archivos_csv
 from limpieza_datos import limpiar_datos

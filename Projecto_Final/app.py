@@ -183,7 +183,7 @@ def calcular_menor_variacion_precio(datos):
             semana1 = int(input("Digite el número de la primera semana: ").strip())
             semana2 = int(input("Digite el número de la segunda semana: ").strip()) 
 
-            calcular_menor_variacion_periodo(datos=datos,columna_periodo="SEMANA",periodo1=semana1,periodo2=semana2,descripcion="semanas")
+            calcular_menor_variacion_periodos(datos=datos,columna_periodo="SEMANA",periodo1=semana1,periodo2=semana2,descripcion="semanas")
 
         elif opcion == "2":
             mes1 = input(
@@ -194,13 +194,13 @@ def calcular_menor_variacion_precio(datos):
                 "Digite el nombre del segundo mes: "
             ).strip().capitalize()
 
-            calcular_menor_variacion_periodo(datos=datos,columna_periodo="MES",periodo1=mes1,periodo2=mes2,descripcion="meses")
+            calcular_menor_variacion_periodos(datos=datos,columna_periodo="MES",periodo1=mes1,periodo2=mes2,descripcion="meses")
             
         elif opcion == "3":
             anio1 = int(input("Digite el primer año: ").strip())
             anio2 = int(input("Digite el segundo año: ").strip())
             
-            calcular_menor_variacion_periodo(datos=datos,columna_periodo="AÑO",periodo1=anio1,periodo2=anio2,descripcion="años")
+            calcular_menor_variacion_periodos(datos=datos,columna_periodo="AÑO",periodo1=anio1,periodo2=anio2,descripcion="años")
             
 
         elif opcion == "4":

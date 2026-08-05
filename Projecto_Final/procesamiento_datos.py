@@ -40,8 +40,12 @@ def calcular_variacion_periodos(datos,columna_periodo,periodo1,periodo2,descripc
         return
 
     # Calcular la variación
-    comparacion["VARIACION"] = (comparacion["PRECIO_PERIODO_2"] - comparacion["PRECIO_PERIODO_1"])
-    comparacion["VARIACION"] = comparacion["VARIACION"].fillna(0)
+    if comparacion["PRECIO_PERIODO_2"] > comparacion["PRECIO_PERIODO_1"]:
+        comparacion["VARIACION"] = (comparacion["PRECIO_PERIODO_2"] - comparacion["PRECIO_PERIODO_1"])
+        comparacion["VARIACION"] = comparacion["VARIACION"].fillna(0)
+    else:
+        comparacion["VARIACION"] = (comparacion["PRECIO_PERIODO_1"] - comparacion["PRECIO_PERIODO_2"])
+        comparacion["VARIACION"] = comparacion["VARIACION"].fillna(0)
 
     # Calcular el valor absoluto para ordenar
     comparacion["VARIACION_ABSOLUTA"] = (comparacion["VARIACION"].abs())
@@ -92,7 +96,13 @@ def calcular_menor_variacion_periodos(datos,columna_periodo,periodo1,periodo2,de
 
     comparacion = pd.merge(periodo1_resumen,periodo2_resumen,on=columnas_grupo,how="inner")
 
-    comparacion["VARIACION"] = (comparacion["PRECIO_PERIODO_2"] - comparacion["PRECIO_PERIODO_1"])
+    # Calcular la variación
+    if comparacion["PRECIO_PERIODO_2"] > comparacion["PRECIO_PERIODO_1"]:
+        comparacion["VARIACION"] = (comparacion["PRECIO_PERIODO_2"] - comparacion["PRECIO_PERIODO_1"])
+        comparacion["VARIACION"] = comparacion["VARIACION"].fillna(0)
+    else:
+        comparacion["VARIACION"] = (comparacion["PRECIO_PERIODO_1"] - comparacion["PRECIO_PERIODO_2"])
+        comparacion["VARIACION"] = comparacion["VARIACION"].fillna(0)
 
     comparacion["VARIACION_ABSOLUTA"] = (comparacion["VARIACION"].abs())
 

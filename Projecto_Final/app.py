@@ -234,7 +234,7 @@ def ejecutar():
         elif opcion == "2":
             calcular_mayor_variacion_precio(datos)        
         elif opcion == "3":
-            pass
+            calcular_menor_variacion_precio(datos)
         elif opcion == "4":
             comparar_productos(datos)
             

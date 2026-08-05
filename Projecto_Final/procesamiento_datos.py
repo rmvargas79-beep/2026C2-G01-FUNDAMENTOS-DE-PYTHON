@@ -181,29 +181,19 @@ def comparar_productos(datos):
 
             if not producto1.empty and not producto2.empty:
 
-                # Crear un DataFrame independiente para cada producto
-                df1 = (
-                    datos[datos["CODIGO"] == codigo1]
-                    .copy()
-                    .sort_values(by=["AÑO", "SEMANA"])
-                )
+                #Cada Producto tiene un data Frame
+                df1 = (datos[datos["CODIGO"] == codigo1].copy().sort_values(by=["AÑO", "SEMANA"]))
 
                 df2 = (datos[datos["CODIGO"] == codigo2].copy().sort_values(by=["AÑO", "SEMANA"]))
 
                 # Convertir los precios a valores numéricos
-                df1["PRECIO"] = pd.to_numeric(
-                    df1["PRECIO"],
-                    errors="coerce"
-                )
+                df1["PRECIO"] = pd.to_numeric(df1["PRECIO"],errors="coerce")
 
-                df2["PRECIO"] = pd.to_numeric(
-                    df2["PRECIO"],
-                    errors="coerce"
-                )
+                df2["PRECIO"] = pd.to_numeric(df2["PRECIO"],errors="coerce")
 
                 # Eliminar registros sin semana o precio
-                df1 = df1.dropna(subset=["SEMANA", "PRECIO"])
-                df2 = df2.dropna(subset=["SEMANA", "PRECIO"])
+                #df1 = df1.dropna(subset=["SEMANA", "PRECIO"])
+                #df2 = df2.dropna(subset=["SEMANA", "PRECIO"])
 
                 # Obtener los nombres de los productos
                 nombre_producto1 = df1.iloc[0]["PRODUCTOS"]

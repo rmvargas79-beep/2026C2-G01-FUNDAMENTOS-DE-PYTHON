@@ -183,59 +183,21 @@ def comparar_productos(datos):
 
                 #Cada Producto tiene un data Frame
                 df1 = (datos[datos["CODIGO"] == codigo1].copy().sort_values(by=["AÑO", "SEMANA"]))
-
                 df2 = (datos[datos["CODIGO"] == codigo2].copy().sort_values(by=["AÑO", "SEMANA"]))
-
-                # Convertir los precios a valores numéricos
                 df1["PRECIO"] = pd.to_numeric(df1["PRECIO"],errors="coerce")
-
                 df2["PRECIO"] = pd.to_numeric(df2["PRECIO"],errors="coerce")
-
-                # Eliminar registros sin semana o precio
-                #df1 = df1.dropna(subset=["SEMANA", "PRECIO"])
-                #df2 = df2.dropna(subset=["SEMANA", "PRECIO"])
-
                 # Obtener los nombres de los productos
                 nombre_producto1 = df1.iloc[0]["PRODUCTOS"]
                 nombre_producto2 = df2.iloc[0]["PRODUCTOS"]
-
                 # Crear la figura
-                plt.figure(figsize=(12, 6))
-
+                plt.figure(figsize=(12, 8))
                 # Graficar el primer producto
-                plt.plot(
-                    df1["SEMANA"],
-                    df1["PRECIO"],
-                    marker="o",
-                    linestyle="-",
-                    linewidth=2,
-                    label=f"{nombre_producto1} - Código {codigo1}"
-                )
-
-                # Graficar el segundo producto
-                plt.plot(
-                    df2["SEMANA"],
-                    df2["PRECIO"],
-                    marker="s",
-                    linestyle="--",
-                    linewidth=2,
-                    label=f"{nombre_producto2} - Código {codigo2}"
-                )
-
-                # Personalizar el gráfico
-                plt.title(
-                    "Comparación del historial de precios por producto",
-                    fontsize=14
-                )
+                plt.plot(df1["SEMANA"],df1["PRECIO"],marker="o",linestyle="-",linewidth=2,label=f"{nombre_producto1} - Código {codigo1}")
+                plt.plot(df2["SEMANA"],df2["PRECIO"],marker="s",linestyle="--",linewidth=2,label=f"{nombre_producto2} - Código {codigo2}")
+                plt.title("Comparación del historial de precios por producto",fontsize=14)
                 plt.xlabel("Semana")
                 plt.ylabel("Precio en colones")
-
-                plt.grid(
-                    True,
-                    linestyle="--",
-                    alpha=0.5
-                )
-
+                plt.grid(True,linestyle="--",alpha=0.5)
                 plt.legend()
                 plt.xticks(rotation=45)
                 plt.tight_layout()

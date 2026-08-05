@@ -4,23 +4,17 @@ import pandas as pd
 from lectura_datos import leer_archivos_csv
 from limpieza_datos import limpiar_datos
 
-
-
 def calcular_variacion_periodos(datos,columna_periodo,periodo1,periodo2,descripcion):
     """Calcula los 10 productos con mayor variación entre dos períodos."""
 
     datos_calculo = datos.copy()
 
-    # Asegurar que PRECIO sea numérico
+    # Forzar que el precio sea un valor numerico
     datos_calculo["PRECIO"] = pd.to_numeric(datos_calculo["PRECIO"],errors="coerce")
 
-    # Eliminar registros sin código o precio
-    #datos_calculo = datos_calculo.dropna(subset=["CODIGO", "PRECIO"])
-
-    # Filtrar el primer período
+    # Obtener la informacion del primer periodo 
     datos_periodo1 = datos_calculo[datos_calculo[columna_periodo] == periodo1].copy()
-
-    # Filtrar el segundo período
+    # Obtener la informacion del primer periodo 
     datos_periodo2 = datos_calculo[datos_calculo[columna_periodo] == periodo2].copy()
 
     if datos_periodo1.empty:

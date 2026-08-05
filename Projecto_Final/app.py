@@ -16,7 +16,6 @@ def mostrar_primeras_entradas(datos):
     columnas = ["CODIGO","PRODUCTOS","TIPO","CALIDAD"]
     datos_ordenados = datos.sort_values(by="PRODUCTOS")
     datos_ordenados = datos_ordenados.drop_duplicates(subset="CODIGO")
-    #print(datos_ordenados[columnas].to_string(index=False))
     
     # Ancho de cada columna
     ancho = {
@@ -194,7 +193,20 @@ def ejecutar():
             comparar_productos(datos)
             
         elif opcion == "5":
-            pass
+            """Graficar el historial de precios de un producto a lo largo del tiempo"""
+            plt.figure(figsize=(12, 8))
+            producto = input("Ingrese el Codigo del producto: ").strip()
+            df = datos.copy()
+            df = df[df["CODIGO"] == int(producto)]
+            plt.plot(df["MES"], df["PRECIO"], label="PRECIO", color="blue", marker="o")
+            plt.title("Historial de Precios del Producto")
+            plt.xlabel("Mes")
+            plt.ylabel("Precio en Colones")
+            plt.tight_layout() 
+            plt.legend()
+            plt.show()
+            
+            
         elif opcion == "6":
             print("\nAnalisis Finalizado")
             input("Presione Enter para Salir...")

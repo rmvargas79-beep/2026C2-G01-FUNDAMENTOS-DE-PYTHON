@@ -180,9 +180,19 @@ def comparar_productos(datos):
                 print(f"\nNo se encontró el producto con código {codigo2}.")
 
             if not producto1.empty and not producto2.empty:
-                resultado = (datos[datos["CODIGO"].isin([codigo1, codigo2])][columnas].sort_values(by=["CODIGO"]))
-                print("\nComparación de productos por código:\n")
-                print(resultado.to_string(index=False))
+                df = (datos[datos["CODIGO"].isin([codigo1, codigo2])][columnas].sort_values(by=["CODIGO"]))
+                #print("\nComparación de productos por código:\n")
+                #print(resultado.to_string(index=False))
+                #plt.plot(df["MES"], df["PRECIO"], label="PRECIO", color="blue", marker="o")
+                """Graficar el historial de precios de un producto a lo largo del tiempo"""
+                plt.plot(df["MES"], df["PRECIO"], marker='o', color='blue', linestyle='-',label='Producto Codigo '+str(codigo1))
+                plt.plot(df["MES"], df["PRECIO"], marker='o', color='orange', linestyle='--',label='Producto Codigo '+str(codigo2))   
+                plt.legend()
+                plt.title("Comparación de Precios de Productos por Código")
+                plt.xlabel("Meses")
+                plt.ylabel("Precio en Colones")
+                plt.show()
+                
 
         elif opcion == "2":
             nombre1 = input("Ingrese el nombre del primer producto: ").strip()

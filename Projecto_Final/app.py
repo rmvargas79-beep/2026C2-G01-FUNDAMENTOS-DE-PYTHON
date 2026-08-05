@@ -3,112 +3,11 @@
 import  matplotlib.pyplot as plt
 import pandas as pd
 
-from procesamiento_datos import calcular_variacion_periodos, calcular_menor_variacion_periodos
+from procesamiento_datos import calcular_variacion_periodos, calcular_menor_variacion_periodos , mostrar_primeras_entradas , comparar_productos
 
 from lectura_datos import leer_archivos_csv
 from limpieza_datos import limpiar_datos
 
-
-
-def mostrar_primeras_entradas(datos):
-    """Muestra una vita de las columnas principales"""
-    
-    columnas = ["CODIGO","PRODUCTOS","TIPO","CALIDAD"]
-    datos_ordenados = datos.sort_values(by="PRODUCTOS")
-    datos_ordenados = datos_ordenados.drop_duplicates(subset="CODIGO")
-    
-    # Ancho de cada columna
-    ancho = {
-        "CODIGO": 10,
-        "PRODUCTOS": 40,
-        "TIPO": 20,
-        "CALIDAD": 20
-    }
-
-    # Encabezados
-    encabezado = ""
-    for col in columnas:
-        encabezado += col.center(ancho[col])
-
-    print(encabezado)
-    print("-" * len(encabezado))
-
-    # Filas
-    for _, fila in datos_ordenados.iterrows():
-        print(
-            str(fila["CODIGO"]).center(ancho["CODIGO"]) +
-            str(fila["PRODUCTOS"]).center(ancho["PRODUCTOS"]) +
-            str(fila["TIPO"]).center(ancho["TIPO"]) +
-            str(fila["CALIDAD"]).center(ancho["CALIDAD"])
-        )
-
-def comparar_productos(datos):
-    
-    columnas = ["CODIGO","PRODUCTOS","TIPO","CALIDAD","UNIDAD","PRECIO","MES","AÑO"]
-
-    while True:
-        print("\nComparar Dos Productos")
-        print("1. Comparar Dos Productos Por Código")
-        print("2. Comparar Productos Por Nombre")
-        print("3. Salir")
-
-        opcion = input("Ingrese la opción del menú: ").lower().strip()
-
-        if opcion == "1":
-            try:
-                codigo1 = int(input("Ingrese el primer codigo: ").strip())
-                codigo2 = int(input("Ingrese el segundo codigo: ").strip())
-            except ValueError:
-                print("\nDigite solo Numeros Enteros.")
-                input("Presione enter para continuar...")
-                continue
-
-            producto1 = datos[datos["CODIGO"] == codigo1]
-            producto2 = datos[datos["CODIGO"] == codigo2]
-
-            if producto1.empty:
-                print(f"\nNo se encontró el producto con código {codigo1}.")
-
-            if producto2.empty:
-                print(f"\nNo se encontró el producto con código {codigo2}.")
-
-            if not producto1.empty and not producto2.empty:
-                resultado = (datos[datos["CODIGO"].isin([codigo1, codigo2])][columnas].sort_values(by=["CODIGO"]))
-                print("\nComparación de productos por código:\n")
-                print(resultado.to_string(index=False))
-
-        elif opcion == "2":
-            nombre1 = input("Ingrese el nombre del primer producto: ").strip()
-            nombre2 = input("Ingrese el nombre del segundo producto: ").strip()
-            producto1 = datos[datos["PRODUCTOS"].str.contains(nombre1,case=False,na=False)]
-            producto2 = datos[datos["PRODUCTOS"].str.contains(nombre2,case=False,na=False)]
-
-            if producto1.empty:
-                print(
-                    f"\nNo se encontró ningún producto con el nombre "
-                    f"'{nombre1}'."
-                )
-
-            if producto2.empty:
-                print(
-                    f"\nNo se encontró ningún producto con el nombre "
-                    f"'{nombre2}'."
-                )
-
-            if not producto1.empty and not producto2.empty:
-                resultado = (datos[datos["PRODUCTOS"].str.contains(nombre1,case=False,na=False) | datos["PRODUCTOS"].str.contains(nombre2,case=False,na=False)][columnas].sort_values(by=["PRODUCTOS"]))
-                print("\nComparación de productos por nombre:\n")
-                print(resultado.to_string(index=False))
-
-        elif opcion == "3":
-                print("\nFin de la comparación de productos.")
-                input("Presione Enter para salir...")
-                break
-
-        else:
-            print("\nERROR: Opción inválida. Escriba un número del 1 al 3.")
-
-        input("\nPresione Enter para continuar...")
 
 
     

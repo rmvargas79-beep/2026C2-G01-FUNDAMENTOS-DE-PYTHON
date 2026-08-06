@@ -14,7 +14,7 @@ def calcular_variacion_periodos(datos,columna_periodo,periodo1,periodo2,descripc
 
     # Obtener la informacion del primer periodo 
     datos_periodo1 = datos_calculo[datos_calculo[columna_periodo] == periodo1].copy()
-    # Obtener la informacion del primer periodo 
+    # Obtener la informacion del Segundo periodo 
     datos_periodo2 = datos_calculo[datos_calculo[columna_periodo] == periodo2].copy()
 
     if datos_periodo1.empty:
@@ -26,17 +26,17 @@ def calcular_variacion_periodos(datos,columna_periodo,periodo1,periodo2,descripc
         return
 
     # Calcular el precio promedio por producto en cada período
-    periodo1_resumen = (datos_periodo1.groupby(["CODIGO", "PRODUCTOS", "TIPO", "CALIDAD", "UNIDAD"],as_index=False)["PRECIO"].mean().rename(columns={"PRECIO": "PRECIO_PERIODO_1"}))
+    periodo1_resumen = (datos_periodo1.groupby(["CODIGO", "PRODUCTOS", "TIPO", "CALIDAD", "UNIDAD"],as_index=False)
+                        ["PRECIO"].mean().rename(columns={"PRECIO": "PRECIO_PERIODO_1"}))
 
-    periodo2_resumen = (datos_periodo2.groupby(["CODIGO", "PRODUCTOS", "TIPO", "CALIDAD", "UNIDAD"],as_index=False)["PRECIO"].mean().rename(columns={"PRECIO": "PRECIO_PERIODO_2"}))
+    periodo2_resumen = (datos_periodo2.groupby(["CODIGO", "PRODUCTOS", "TIPO", "CALIDAD", "UNIDAD"],as_index=False)
+                        ["PRECIO"].mean().rename(columns={"PRECIO": "PRECIO_PERIODO_2"}))
 
     # Unir los dos períodos utilizando el código del producto
     comparacion = pd.merge(periodo1_resumen,periodo2_resumen,on=["CODIGO", "PRODUCTOS", "TIPO", "CALIDAD", "UNIDAD"],how="inner")
 
     if comparacion.empty:
-        print(
-            "\nNo existen productos en común entre los dos períodos."
-        )
+        print("\nNo existen productos en común entre los dos períodos.")
         return
 
     # Calcular la variación
@@ -52,14 +52,16 @@ def calcular_variacion_periodos(datos,columna_periodo,periodo1,periodo2,descripc
     # Obtener los 10 productos con mayor cambio
     datos_finales = (comparacion.sort_values(by="VARIACION_ABSOLUTA",ascending=False).head(10))
 
-    columnas_mostrar = ["CODIGO","PRODUCTOS","TIPO","CALIDAD","UNIDAD","PRECIO_PERIODO_1","PRECIO_PERIODO_2","VARIACION","VARIACION_PORCENTUAL"]
+    columnas_mostrar = ["CODIGO","PRODUCTOS","TIPO","CALIDAD","UNIDAD","PRECIO_PERIODO_1","PRECIO_PERIODO_2","VARIACION",
+                        "VARIACION_PORCENTUAL"]
 
     print(
         f"\nLos 10 productos con mayor variación entre los "
         f"{descripcion} {periodo1} y {periodo2} son:\n"
     )
 
-    print(datos_finales[columnas_mostrar].to_string(index=False,formatters={"PRECIO_PERIODO_1": "{:,.2f}".format,"PRECIO_PERIODO_2": "{:,.2f}".format,"VARIACION": "{:,.2f}".format,"VARIACION_PORCENTUAL": "{:,.2f}%".format}))
+    print(datos_finales[columnas_mostrar].to_string(index=False,formatters={"PRECIO_PERIODO_1": "{:,.2f}".format,"PRECIO_PERIODO_2":
+        "{:,.2f}".format,"VARIACION": "{:,.2f}".format,"VARIACION_PORCENTUAL": "{:,.2f}%".format}))
 
 
 
@@ -90,9 +92,11 @@ def calcular_menor_variacion_periodos(datos,columna_periodo,periodo1,periodo2,de
 
     columnas_grupo = ["CODIGO","PRODUCTOS","TIPO","CALIDAD","UNIDAD"]
 
-    periodo1_resumen = (datos_periodo1.groupby(columnas_grupo, as_index=False)["PRECIO"].mean().rename(columns={"PRECIO": "PRECIO_PERIODO_1"}))
+    periodo1_resumen = (datos_periodo1.groupby(columnas_grupo, as_index=False)
+                        ["PRECIO"].mean().rename(columns={"PRECIO": "PRECIO_PERIODO_1"}))
 
-    periodo2_resumen = (datos_periodo2.groupby(columnas_grupo, as_index=False)["PRECIO"].mean().rename(columns={"PRECIO": "PRECIO_PERIODO_2"}))
+    periodo2_resumen = (datos_periodo2.groupby(columnas_grupo, as_index=False)
+                        ["PRECIO"].mean().rename(columns={"PRECIO": "PRECIO_PERIODO_2"}))
 
     comparacion = pd.merge(periodo1_resumen,periodo2_resumen,on=columnas_grupo,how="inner")
 
@@ -226,7 +230,8 @@ def comparar_productos(datos):
                 )
 
             if not producto1.empty and not producto2.empty:
-                resultado = (datos[datos["PRODUCTOS"].str.contains(nombre1,case=False,na=False) | datos["PRODUCTOS"].str.contains(nombre2,case=False,na=False)][columnas].sort_values(by=["PRODUCTOS"]))
+                resultado = (datos[datos["PRODUCTOS"].str.contains(nombre1,case=False,na=False) | 
+                                    datos["PRODUCTOS"].str.contains(nombre2,case=False,na=False)][columnas].sort_values(by=["PRODUCTOS"]))
                 print("\nComparación de productos por nombre:\n")
                 print(resultado.to_string(index=False))
 

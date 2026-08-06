@@ -9,12 +9,6 @@ from procesamiento_datos import (calcular_variacion_periodos, calcular_menor_var
 from lectura_datos import leer_archivos_csv
 from limpieza_datos import limpiar_datos
 
-
-
-    
-
-
-
 def ejecutar():
     datos_crudos = leer_archivos_csv()
     datos = datos_crudos.copy()

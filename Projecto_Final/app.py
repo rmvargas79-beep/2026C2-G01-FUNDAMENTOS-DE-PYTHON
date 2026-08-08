@@ -39,8 +39,13 @@ def ejecutar():
             producto = input("Ingrese el Codigo del producto: ").strip()
             
             df = datos.copy()
+            
             df = df[df["CODIGO"] == int(producto)]
             nombre= df[df["CODIGO"] == int(producto)]["PRODUCTOS"].iloc[0]
+            df = df.groupby(["AÑO", "MES"], as_index=False).agg({"PRECIO": "mean"})
+            print(df.shape)
+            print(df)
+            print(df.info())
             plt.plot(df["MES"], df["PRECIO"], label="PRECIO", color="blue", marker="o")
             plt.title("Historial de Precios del Producto " + nombre)
             plt.xlabel("Mes")

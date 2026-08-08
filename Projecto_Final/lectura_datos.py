@@ -57,7 +57,7 @@ def leer_archivos_csv():
         anio = int(coincidencia.group(2))
 
         # Obtener el lunes correspondiente a esa semana
-        fecha = datetime.fromisocalendar(anio, semana, 1)
+        fecha = datetime.fromisocalendar(anio, semana, 4)
 
         # Agregar nuevas columnas
         df["Semana"] = semana

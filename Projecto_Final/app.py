@@ -43,20 +43,18 @@ def ejecutar():
             df = df[df["CODIGO"] == int(producto)]
             nombre= df[df["CODIGO"] == int(producto)]["PRODUCTOS"].iloc[0]
             df = df.groupby(["AÑO", "MES"], as_index=False).agg({"PRECIO": "mean"})
-                orden_meses = {
-                                "Enero": 1,
-                                "Febrero": 2,
-                                "Marzo": 3,
-                                "Abril": 4,
-                                "Mayo": 5,
-                                "Junio": 6,
-                                "Julio": 7,
-                                "Agosto": 8,
-                                "Septiembre": 9,
-                                "Octubre": 10,
-                                "Noviembre": 11,
-                                "Diciembre": 12
-                            }
+            orden_meses = {"Enero": 1,
+                            "Febrero": 2,
+                            "Marzo": 3,
+                            "Abril": 4,
+                            "Mayo": 5,
+                            "Junio": 6,
+                            "Julio": 7,
+                            "Agosto": 8,
+                            "Septiembre": 9,
+                            "Octubre": 10,
+                            "Noviembre": 11,
+                            "Diciembre": 12}
 
             # Crear columna temporal con número de mes
             df["ORDEN_MES"] = df["MES"].map(orden_meses)

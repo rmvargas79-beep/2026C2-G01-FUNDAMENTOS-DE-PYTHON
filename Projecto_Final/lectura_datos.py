@@ -44,9 +44,13 @@ def leer_archivos_csv():
         # Limpiar nombres de columnas
         df.columns = df.columns.str.strip()
         
-        df.rename(columns={"Precio venta": "Precio Venta"},inplace=True)
-        df.rename(columns={"Precio venra": "Precio Venta"},inplace=True)
-        #df.rename(columns={df.columns[5]: "Precio Venta"}, inplace=True)
+        #Para cuando ocupe ver las columnas TODO Borrar revision Final
+        #for i, columna in enumerate(df.columns):
+        #    print(i, columna)
+        #df.rename(columns={"Precio venta": "Precio Venta"},inplace=True)
+        #df.rename(columns={"Precio venra": "Precio Venta"},inplace=True)
+        #df.columns.values[5] = "Precio Venta"
+        df.rename(columns={df.columns[6]: "Precio Venta"}, inplace=True)
 
         # Eliminar columnas vacías
         df = df.loc[:, ~df.columns.str.contains("^Unnamed")]
